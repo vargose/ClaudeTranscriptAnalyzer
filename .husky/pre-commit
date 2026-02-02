@@ -1,0 +1,25 @@
+# Run lint-staged for formatting and linting
+if ! npx lint-staged; then
+  echo "❌ ESLint errors: Fix issues above, stage files, and commit again"
+  exit 1
+fi
+
+# Run type checking
+if ! npm run typecheck; then
+  echo "❌ TypeScript errors: Fix type issues above, stage files, and commit again"
+  exit 1
+fi
+
+# Build verification
+if ! npm run build; then
+  echo "❌ Build failed: Fix compilation errors above, stage files, and commit again"
+  exit 1
+fi
+
+# Run tests with coverage threshold enforcement
+if ! npm run test:coverage; then
+  echo "❌ Test/coverage failure: Fix failing tests or add tests to reach 89% coverage, then commit again"
+  exit 1
+fi
+
+echo "✅ All checks passed"

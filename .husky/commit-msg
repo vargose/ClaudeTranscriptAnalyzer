@@ -1,0 +1,5 @@
+# Validate commit message format
+if ! npx commitlint --edit "$1"; then
+  echo "❌ Commit message invalid: Use conventional commits format (type: subject)"
+  exit 1
+fi
