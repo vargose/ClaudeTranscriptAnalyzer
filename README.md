@@ -87,33 +87,53 @@ This project enforces strict code quality standards:
 - **Statements**: 89%
 
 ### Git Hooks (via Husky)
-Pre-commit hook automatically runs:
+
+**Pre-commit hook** automatically runs:
 1. **lint-staged**: Auto-fixes and formats staged files with ESLint and Prettier
-   - Auto-fixable issues (formatting, simple style) are fixed and included in the commit
-   - Non-fixable issues (unused variables, logic errors) will **fail the commit**
-2. **Type checking**: Ensures no TypeScript errors - **fails commit if errors found**
-3. **Test coverage**: Enforces 89% coverage thresholds - **fails commit if not met**
+2. **Type checking**: Ensures no TypeScript errors
+3. **Build verification**: Confirms the project compiles successfully
+4. **Test coverage**: Enforces 89% coverage thresholds
+
+**Commit-msg hook** validates:
+- **Conventional commits**: Enforces format like `feat: add feature` or `fix: resolve bug`
 
 **Commit Failure Scenarios:**
-- ❌ ESLint errors that can't be auto-fixed (e.g., unused variables, missing return types)
+- ❌ ESLint errors that can't be auto-fixed
 - ❌ TypeScript compilation errors
-- ❌ Test failures
-- ❌ Coverage below 89% threshold
+- ❌ Build failures
+- ❌ Test failures or coverage below 89%
+- ❌ Invalid commit message format
 
 **Concise Error Messages:**
-Pre-commit failures provide single-line, actionable guidance optimized for token efficiency:
+All failures provide single-line guidance optimized for token efficiency:
 - `❌ ESLint errors: Fix issues above, stage files, and commit again`
 - `❌ TypeScript errors: Fix type issues above, stage files, and commit again`
+- `❌ Build failed: Fix compilation errors above, stage files, and commit again`
 - `❌ Test/coverage failure: Fix failing tests or add tests to reach 89% coverage, then commit again`
+- `❌ Commit message invalid: Use conventional commits format (type: subject)`
 - `✅ All checks passed` on success
 
 All checks must pass before commits are allowed, ensuring code quality at every stage. Auto-fixable formatting issues are handled automatically, but code quality issues must be resolved manually.
+
+## MCP Integration
+
+This project includes **Serena MCP** configuration for LSP-powered semantic code understanding.
+
+### Setup
+The MCP configuration is defined in `.mcp.json` (project-scoped, version-controlled):
+- **Serena MCP**: TypeScript language server with go-to-definition, find references, diagnostics
+- Provides IDE-quality code intelligence to Claude Code
+- Automatically installs `typescript-language-server`
+
+When you open this project in Claude Code, it will detect `.mcp.json` and prompt you to enable Serena MCP.
 
 ## Project Demonstrates
 
 - ✅ TypeScript development with strong typing
 - ✅ React hooks in a CLI context (useState, useEffect, custom hooks)
 - ✅ CLI tool development with Ink
-- ✅ Comprehensive test coverage with Vitest (v8 coverage)
+- ✅ Comprehensive test coverage with Vitest (v8 coverage, 89% threshold)
 - ✅ Modern ESLint 9 flat config
-- ✅ Automated quality gates with git hooks
+- ✅ Automated quality gates with git hooks (pre-commit + commit-msg)
+- ✅ Conventional commits for consistent history
+- ✅ MCP integration with Serena for LSP-powered code intelligence
