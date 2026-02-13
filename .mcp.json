@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "serena": {
-      "description": "LSP-powered semantic code understanding - provides TypeScript language server integration, go-to-definition, find references, rename symbol, real-time diagnostics, and IDE-quality code intelligence for Claude",
+      "description": "LSP-powered semantic code analysis: TypeScript/JavaScript navigation, symbol search, refactoring, type checking, diagnostics. Tools: find_symbol, find_referencing_symbols, get_symbols_overview, rename_symbol, replace_symbol_body. Essential for codebase exploration and precise code modifications.",
       "command": "uvx",
       "args": [
         "--from",
@@ -14,7 +14,7 @@
       ]
     },
     "trello": {
-      "description": "Production-ready Trello integration with 2.8-4.4x performance boost via Bun runtime - enables story tracking, board/list/card management, built-in rate limiting, and natural language project management through Trello's API",
+      "description": "Trello project management integration: board/list/card CRUD, task tracking, member assignments, labels, checklists, attachments, comments. Tools: get_lists, add_card_to_list, update_card_details, move_card, archive_card, create_checklist. Essential for task management and team collaboration.",
       "command": "bunx",
       "args": ["@delorenj/mcp-server-trello"],
       "env": {
